@@ -1,12 +1,12 @@
 ---
-  calibre_web:
-    # default values:
-    name: default_library
-    port: 8085
+calibre_web:
+  # default values:
+  name: default_library
+  port: 8085
 
-    # mandatory values:
-    # folder: path/to/the/calibre/folder
-    # domain: example.com
+  # mandatory values:
+  # folder: path/to/the/calibre/folder
+  # domain: example.com
 
-    # optional values:
-    # db_symlink_path: /path/to/app.db
+  # optional values:
+  # db_symlink_path: /path/to/app.db

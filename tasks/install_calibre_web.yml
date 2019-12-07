@@ -3,12 +3,11 @@
   git:
     repo: https://github.com/janeczku/calibre-web.git
     dest: /var/www/calibre-{{ calibre_web.name }}
-    force: true
-  ignore_errors: yes
+    version: '0.6.4'
+  ignore_errors: 'yes'
 
 - name: Install requirements for root user
-  become: true
-  shell: pip install -r requirements.txt
+  command: pip install -r requirements.txt
   args:
     chdir: /var/www/calibre-{{ calibre_web.name }}
 
@@ -42,7 +41,7 @@
 - name: Enable {{ calibre_web.name }} service
   systemd:
     name: "{{ calibre_web.name }}.service"
-    enabled: yes
+    enabled: 'yes'
     state: restarted
-    daemon_reload: yes
+    daemon_reload: 'yes'
   become: true

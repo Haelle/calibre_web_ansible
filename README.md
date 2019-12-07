@@ -1,38 +1,76 @@
-Role Name
-=========
+# Role Name
 
-A brief description of the role goes here.
+This Ansible role install [Calibre Web](https://github.com/janeczku/calibre-web) with Nginx and Pip
 
-Requirements
-------------
+_Warning_, this role runs as _sudo_.
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+## Warnings
 
-Role Variables
---------------
+There are 3 manuals steps to do after an installation:
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+1. Set the Calibre directory.
+There is no way to set the Calibre directory  where your books are from the command line.
+You need to set it manually from the web interface.
 
-Dependencies
-------------
+2. Set the Calibre-Web port
+This is the same forthe port, if different from 8085, you need to change it in the web interface.
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+3. Update the admin password
+Default admin login:
+Username: admin
+Password: admin123
 
-Example Playbook
-----------------
+You should change them also within the interface
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+## Role Variables
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+### Mandatory variables
 
-License
--------
+1. `calibre_web.domain`: domain on which create the Nginx conf (URL would be
+   _default_library.example.com_
+
+### Optional variables
+
+1. `calibre_web.name`: the name of the calibre library (usefull if you install many libraries)
+2. `calibre_web.db_symlink_path`: path to your `app.db` of Calibre-Web (usefull if you want to sync it in the cloud, if not defined it will create a new one)
+3. `calibre_web.port`: internal port for nginx proxy pass, when having many Calibre-web they should be differents ports (default is 8085)
+
+## Dependencies
+
+This role has not dependencies but will install :
+- git
+- nginx
+- pip
+
+## Example Playbook
+
+Minimal playbook:
+```yaml
+---
+- hosts: servers
+  become: 'yes'
+
+  roles:
+    - role: calibre_web_ansible
+      calibre_web:
+        domain: example.com
+```
+
+Full playbook :
+```yaml
+---
+- hosts: servers
+  become: 'yes'
+
+  roles:
+    - role: calibre_web_ansible
+      calibre_web:
+        name: default_library
+        port: 8085
+        domain: example.com
+        db_symlink_path: /path/to/calibre_web/app.db'
+```
+
+## License
 
 BSD
-
-Author Information
-------------------
-
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).

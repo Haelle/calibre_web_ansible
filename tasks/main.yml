@@ -1,2 +1,14 @@
 ---
-# tasks file for calibre-web-ansible
+- name: Install dependencies
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - git
+    - nginx
+
+- name: Download & Install PIP
+  include: install_pip.yml
+
+- name: Install Calibre-Web
+  include: install_calibre_web.yml

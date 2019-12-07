@@ -1,0 +1,9 @@
+Description=Calibre-{{ calibre_web.name }}
+
+[Service]
+Type=simple
+User=root
+ExecStart=/usr/bin/python /var/www/calibre-{{ calibre_web.name }}/cps.py
+
+[Install]
+WantedBy=multi-user.target

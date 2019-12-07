@@ -19,6 +19,6 @@ galaxy_info:
       version:
         - bionic
 
-  galaxy_tags: [calibre, calibre-web]
+  galaxy_tags: [calibre, web]
 
 dependencies: []

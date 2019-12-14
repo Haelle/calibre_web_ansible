@@ -12,3 +12,10 @@
 
 - name: Install Calibre-Web
   include: install_calibre_web.yml
+
+- name: Setup SSL for the domain
+  include_role:
+    name: haelle.certbot_ansible
+  vars:
+    certbot_admin_email: '{{ calibre_web.certbot_email }}'
+    domains_to_cert: '{{ calibre_web.name }}.{{calibre_web.domain }}'

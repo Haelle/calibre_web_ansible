@@ -15,12 +15,6 @@ server {
     proxy_set_header        X-Script-Name   /calibre-{{ calibre_web.name }};
   }
 
-    listen 443 ssl; # managed by Certbot
-    # TODO what to do with this ! auto gen ?
-    ssl_certificate /etc/letsencrypt/live/alexandrie.alxs.fr/fullchain.pem; # managed by Certbot
-    ssl_certificate_key /etc/letsencrypt/live/alexandrie.alxs.fr/privkey.pem; # managed by Certbot
-    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
-
     if ($scheme != "https") {
         return 301 https://$host$request_uri;
     } # managed by Certbot

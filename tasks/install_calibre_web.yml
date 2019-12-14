@@ -28,20 +28,21 @@
 - name: Copy Nginx conf
   template:
     src: nginx_conf.j2
-    dest: /etc/nginx/sites-available/{{ calibre_web.name }}.conf
+    dest: /etc/nginx/sites-available/calibre-{{ calibre_web.name }}.conf
     mode: 0644
   notify: reload nginx
 
 - name: symlink to site enabled
   file:
-    src: /etc/nginx/sites-available/{{ calibre_web.name }}.conf
-    path: /etc/nginx/sites-enabled/{{ calibre_web.name }}.conf
+    src: /etc/nginx/sites-available/calibre-{{ calibre_web.name }}.conf
+    path: /etc/nginx/sites-enabled/calibre-{{ calibre_web.name }}.conf
     state: link
 
 - name: Enable {{ calibre_web.name }} service
   systemd:
-    name: "{{ calibre_web.name }}.service"
+    name: "calibre-{{ calibre_web.name }}.service"
     enabled: 'yes'
     state: restarted
     daemon_reload: 'yes'
   become: true
+  notify: reload nginx

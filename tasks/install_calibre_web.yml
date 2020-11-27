@@ -3,11 +3,11 @@
   git:
     repo: https://github.com/janeczku/calibre-web.git
     dest: /var/www/calibre-{{ calibre_web.name }}
-    version: '0.6.4'
+    version: '{{ version }}'
   ignore_errors: 'yes'
 
 - name: Install requirements for root user
-  command: pip install -r requirements.txt
+  command: python3 -m pip install --target vendor -r requirements.txt
   args:
     chdir: /var/www/calibre-{{ calibre_web.name }}
 

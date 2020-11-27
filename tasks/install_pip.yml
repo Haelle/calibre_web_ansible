@@ -1,9 +1,0 @@
----
-- name: Download PIP
-  get_url:
-    url: https://bootstrap.pypa.io/get-pip.py
-    dest: ~/get-pip.py
-    mode: '0644'
-
-- name: Install PIP
-  command: python ~/get-pip.py

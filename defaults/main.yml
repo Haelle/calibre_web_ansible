@@ -1,9 +1,9 @@
 ---
+calibre_version: 0.6.9
 calibre_web:
   # default values:
   name: default_library
   port: 8085
-  version: 0.6.9
 
   # mandatory values:
   # folder: path/to/the/calibre/folder

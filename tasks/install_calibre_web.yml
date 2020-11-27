@@ -3,7 +3,7 @@
   git:
     repo: https://github.com/janeczku/calibre-web.git
     dest: /var/www/calibre-{{ calibre_web.name }}
-    version: '{{ calibre_web.version }}'
+    version: '{{ calibre_version }}'
   ignore_errors: 'yes'
 
 - name: Install requirements for root user

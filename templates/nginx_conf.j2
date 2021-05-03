@@ -1,10 +1,9 @@
 server {
-  listen 80;
-  listen [::]:80;
+  listen 443 ssl;
 
   root /var/www/calibre-{{ calibre_web.name }};
 
-  server_name {{ calibre_web.name }}.{{ calibre_web.domain }};
+  server_name {{ calibre_web.fqdn }};
 
   location / {
     proxy_bind              $server_addr;
@@ -15,7 +14,21 @@ server {
     proxy_set_header        X-Script-Name   /calibre-{{ calibre_web.name }};
   }
 
-    if ($scheme != "https") {
-        return 301 https://$host$request_uri;
-    } # managed by Certbot
+  ssl_certificate /etc/letsencrypt/live/{{ calibre_web.fqdn }}/fullchain.pem;
+  ssl_certificate_key /etc/letsencrypt/live/{{ calibre_web.fqdn }}/privkey.pem;
+  include /etc/letsencrypt/options-ssl-nginx.conf;
+  ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+}
+
+server {
+  listen 80;
+  listen [::]:80;
+
+  server_name {{ calibre_web.fqdn }};
+
+  if ($host = {{ calibre_web.fqdn }}) {
+    return 301 https://$host$request_uri;
+  }
+
+  return 404;
 }

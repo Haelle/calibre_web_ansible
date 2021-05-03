@@ -11,7 +11,7 @@ There are 4 manuals steps to do after an installation:
 1. Go to your_server:8085 to setup your library. You'll have to do the other steps
 
 2. Set the Calibre directory.
-There is no way to set the Calibre directory  where your books are from the command line.
+There is no way to set the Calibre directory where your books are from the command line.
 You need to set it manually from the web interface.
 
 3. Set the Calibre-Web port
@@ -28,9 +28,8 @@ You should change them also within the interface
 
 ### Mandatory variables
 
-1. `calibre_web.domain`: domain on which create the Nginx conf (URL would be
-   _default_library.example.com_
-2. `certbot_admin_email`: the email to register the domain name certificate for Certbot
+1. `calibre_web.fqdn`: fully qualified domain name on which create the Nginx conf
+1. `certbot_email`: the email to register the domain name certificate for Certbot
 
 ### Optional variables
 
@@ -69,8 +68,8 @@ Minimal playbook:
   roles:
     - role: calibre_web_ansible
       calibre_web:
-        domain: example.com
-        certbot_admin_email: admin@example.com
+        fqdn: library.example.com
+        certbot_email: admin@example.com
 ```
 
 Full playbook :
@@ -84,9 +83,9 @@ Full playbook :
       calibre_web:
         name: default_library
         port: 8085
-        domain: example.com
+        fdqn: library.example.com
         db_symlink_path: /path/to/calibre_web/app.db'
-        certbot_admin_email: admin@example.com
+        certbot_email: admin@example.com
 ```
 
 ## License

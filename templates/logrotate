@@ -1,0 +1,9 @@
+/var/www/calibre-{{ calibre_web.name }}/*.log
+{
+  monthly
+  rotate 12
+  compress
+  delaycompress
+  missingok
+  notifempty
+}

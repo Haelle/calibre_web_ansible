@@ -46,3 +46,10 @@
     daemon_reload: 'yes'
   become: true
   notify: reload nginx
+
+- name: Configure Logrotate
+  copy:
+    src: logrotate
+    dest: /etc/logrotate.d/calibre_web_{{ calibre_web.name }}
+    mode: '0644'
+  tags: logrotate

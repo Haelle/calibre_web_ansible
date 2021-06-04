@@ -48,8 +48,8 @@
   notify: reload nginx
 
 - name: Configure Logrotate
-  copy:
-    src: logrotate
+  template:
+    src: logrotate.j2
     dest: /etc/logrotate.d/calibre_web_{{ calibre_web.name }}
     mode: '0644'
   tags: logrotate
